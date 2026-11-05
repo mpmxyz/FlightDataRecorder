@@ -1,0 +1,5 @@
+# `string`
+
+- `Value`
+- `Reference`
+- `Object`
