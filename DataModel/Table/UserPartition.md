@@ -1,18 +1,24 @@
-`Slot`:
+# `Slot`
+
+contains all data under a given user's authority
+
+Only this user is permitted to add/remove entries.
+Modifying existing items is permitted for every user.
+
+### Properties
+
 |Name|Type|Description|
 |-|-|-|
-|Name|`string`|???|
-|Active|`bool`|???|
-|Tag|`string`|???|
-|OrderOffset|`long`|???|
+|Name|`string`|reserved|
+|Active|`bool`|reserved|
+|Tag|`string`|reserved|
+|OrderOffset|`long`|reserved|
 
-TODO: id generated from User
+### Space: "UserPartition"
 
-Children: instances of [`ColumnData`](ColumnData.md)
-
-Space: "UserPartition"
 |Name|Type|Description|
 |-|-|-|
-|Data|`SyncRefDictionary<string,Slot>`|"{[`ColumnKey`](ColumnKey.md)}.{[`ColumnData.Variant`](ColumnData.Variant.md)}" -> [`ColumnData`](ColumnData.md)|
-
+|ColumnData|`Slot`|contains instances of [`ColumnData`](ColumnData.md)|
+|ColumnData|`SyncRefDictionary<string,Slot>`|"{[`ColumnKey`](ColumnKey.md)}.{[`ColumnData.Variant`](ColumnData.Variant.md)}" -> [`ColumnData`](ColumnData.md), index of `ColumnData:Slot`|
+|Owner|`User`|owner of the partition who has authority over it (`null`/not existing implies host)|
 

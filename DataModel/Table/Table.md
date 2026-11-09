@@ -1,6 +1,7 @@
 # `Slot`
 
-Space: "Table"
+### Space: "Table"
+
 |Tag|Type|Description|
 |-|-|-|
 |UserPartitions|`Slot`|contains instances of [`UserPartition`](UserPartition.md)|

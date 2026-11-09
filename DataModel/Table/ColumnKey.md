@@ -1,6 +1,8 @@
 # `string`
 
-Common keys:
+defines a column of data
+
+### Known values
 
 |`ColumnKey`|Associated Value Type|Description|
 |-|-|-|
@@ -12,4 +14,6 @@ Common keys:
 |UTC|`DateTime`||
 |T|`double`||
 
-Other keys should be unique. (i.e. UUIDs)
+### Other values
+
+should be unique (i.e. UUIDs)

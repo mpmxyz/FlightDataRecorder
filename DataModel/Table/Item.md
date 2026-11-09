@@ -1,5 +1,7 @@
 # `Slot`
 
+### Properties
+
 |Name|Type|Description|
 |-|-|-|
 |Name|`string`|[`ItemKey`](ItemKey.md) -> easily visible in inspectors or when grabbing references|
@@ -7,9 +9,10 @@
 |OrderOffset|`long`|bit-converted `Time:double` to ensure time-consistent order|
 
 
-Space: "Item"
+### Space: "Item"
+
 |Name|Type|Description|
 |-|-|-|
-|Columns|`SyncDictionary<string,Slot>`|[`ColumnKey`](ColumnKey.md) -> [`ColumnData`](ColumnData.md)|
+|Columns|`SyncRefDictionary<string,Slot>`|[`ColumnKey`](ColumnKey.md) -> [`ColumnData`](ColumnData.md)|
 
 

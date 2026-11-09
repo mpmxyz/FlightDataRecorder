@@ -1,5 +1,7 @@
 # `Slot`
 
+### Properties
+
 |Name|Type|Description|
 |-|-|-|
 |Name|`string`|[ItemKey](ItemKey.md)|
@@ -7,7 +9,8 @@
 |Tag|`string`|???|
 |OrderOffset|`long`|???|
 
-Dynamic Impulses:
+### Dynamic Impulses
+
 |Tag|Type|Description|
 |-|-|-|
 |WriteValue|`object` (sync)|stores the given value, updates `Text` and `Type` dictionaries of parent|

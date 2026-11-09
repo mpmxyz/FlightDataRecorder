@@ -1,37 +1,55 @@
 # `Slot`
 
-|Name|Type|Description|
-|-|-|-|
-|Name|`string`|[`ColumnKey`](ColumnKey.md)|
-|Active|`bool`|???|
-|Tag|`string`|[`ColumnData.Variant`](ColumnData.Variant.md)|
-|OrderOffset|`long`|???|
+each instance contains a column of values of a certain (base) type
 
-## Variant: "Value" (single type of value)
+### Properties
 
-Space: "ColumnData"
-|Name|Type|Description|
-|-|-|-|
-|Data|`SyncFieldDictionary<string,T>` or `SyncTypeDictionary<string>`|[`ItemKey`](ItemKey.md) -> Value|
-|Text|`SyncFieldDictionary<string,string>`|[`ItemKey`](ItemKey.md) -> Value.ToString()|
-|Type|`Type`|type of the data|
+|Name|Type|Access|Description|
+|-|-|-|-|
+|Name|`string`|Initialized, |[`ColumnKey`](ColumnKey.md)|
+|Active|`bool`||reserved|
+|Tag|`string`||[`ColumnData.Variant`](ColumnData.Variant.md)|
+|OrderOffset|`long`||reserved|
 
-## Variant: "Reference" (values implementing `IWorldElement`)
+## Variant: "T" (single type of value)
 
-Space: "ColumnData"
-|Name|Type|Description|
-|-|-|-|
-|Data|`SyncRefDictionary<string,IWorldElement>`|[`ItemKey`](ItemKey.md) -> Value|
-|Text|`SyncFieldDictionary<string,string>`|[`ItemKey`](ItemKey.md) -> "{Value.RefID}:{Value.ToString()}"|
-|Type|`SyncTypeDictionary<string>`|[`ItemKey`](ItemKey.md) -> Value.GetType()|
+### Space: "ColumnData"
 
-## Variant: "Object" (ProtoFlux-Store based storage)
+|Name|Type|Access|Description|
+|-|-|-|-|
+|Values|`SyncFieldDictionary<string,T>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> Value|
+|Texts|`SyncFieldDictionary<string,string>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> Value.ToString()|
+|Type|`Type`|Read only|type of the value|
 
-Children: instances of [`ObjectContainer`](ObjectContainer.md)
+(T=`string` allows `Data` and `Text` to point to the same dictionary.)
 
-Space: "ColumnData"
-|Name|Type|Description|
-|-|-|-|
-|Containers|`SyncRefDictionary<string,Slot>`|[`ItemKey`](ItemKey.md) -> [`ObjectContainer`](ObjectContainer.md), a lookup table to get instances within by key|
-|Text|`SyncFieldDictionary<string,string>`|[`ItemKey`](ItemKey.md) -> Value.ToString()|
-|Type|`SyncTypeDictionary<string>`|[`ItemKey`](ItemKey.md) -> Value.GetType()|
+## Variant: "Type" (type values)
+
+### Space: "ColumnData"
+
+|Name|Type|Access|Description|
+|-|-|-|-|
+|Values|`SyncTypeDictionary<string>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> Value|
+|Texts|`SyncFieldDictionary<string,string>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> Value.ToString()|
+|Type|`Type`|Read only|the base class `Type`|
+
+## Variant: "Reference" (used for all values of IWorldElement)
+
+### Space: "ColumnData"
+
+|Name|Type|Access|Description|
+|-|-|-|-|
+|Values|`SyncRefDictionary<string,IWorldElement>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> Value|
+|Texts|`SyncFieldDictionary<string,string>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> "{Value.RefID}:{Value.ToString()}"|
+|Types|`SyncTypeDictionary<string>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> Value.GetType()|
+
+## Variant: "ObjectContainer" (ProtoFlux-Store based storage)
+
+### Space: "ColumnData"
+
+|Name|Type|Access|Description|
+|-|-|-|-|
+|Containers|`Slot`|Read only|parent of instances of [`ObjectContainer`](ObjectContainer.md)|
+|Containers|`SyncRefDictionary<string,Slot>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> [`ObjectContainer`](ObjectContainer.md), a lookup table to get children of `Containers:Slot` by key|
+|Texts|`SyncFieldDictionary<string,string>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> Value.ToString()|
+|Types|`SyncTypeDictionary<string>`|Read only, Collection: Read/Write|[`ItemKey`](ItemKey.md) -> Value.GetType()|
