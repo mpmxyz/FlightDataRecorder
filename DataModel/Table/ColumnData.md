@@ -6,9 +6,9 @@ each instance contains a column of values of a certain (base) type
 
 |Name|Type|Access|Description|
 |-|-|-|-|
-|Name|`string`|Initialized, |[`ColumnKey`](ColumnKey.md)|
+|Name|`string`|Read only|[`ColumnKey`](ColumnKey.md), initialized with a unique value on duplication|
 |Active|`bool`||reserved|
-|Tag|`string`||[`ColumnData.Variant`](ColumnData.Variant.md)|
+|Tag|`string`|Read only|[`ColumnData.Variant`](ColumnData.Variant.md)|
 |OrderOffset|`long`||reserved|
 
 ## Variant: "T" (single type of value)

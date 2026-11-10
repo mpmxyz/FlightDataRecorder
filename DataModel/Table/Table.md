@@ -2,8 +2,8 @@
 
 ### Space: "Table"
 
-|Tag|Type|Description|
-|-|-|-|
-|UserPartitions|`Slot`|contains instances of [`UserPartition`](UserPartition.md)|
-|Items|`Slot`|contains instances of [`Item`](Item.md)|
+|Name|Type|Access|Description|
+|-|-|-|-|
+|UserPartitions|`Slot`|Read only|contains instances of [`UserPartition`](UserPartition.md)|
+|Items|`Slot`|Read only|contains instances of [`Item`](Item.md)|
 

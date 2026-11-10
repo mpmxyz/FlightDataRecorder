@@ -1,3 +1,3 @@
 # `string`
 
-locally generated, globally unique ID (i.e. UUID)
+never `null`, locally generated, globally unique ID (i.e. UUID)

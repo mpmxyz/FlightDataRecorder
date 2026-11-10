@@ -1,5 +1,7 @@
 # `string`
 
+never null, identifies how and what kind of data is stored
+
 ### Known values
 
 |Value|Description|

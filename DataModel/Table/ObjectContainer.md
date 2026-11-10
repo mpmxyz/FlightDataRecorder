@@ -1,5 +1,7 @@
 # `Slot`
 
+contains a single
+
 ### Properties
 
 |Name|Type|Description|
