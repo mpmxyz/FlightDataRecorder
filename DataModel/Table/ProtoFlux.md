@@ -7,7 +7,6 @@
 |Item|`Slot`|Write only|[`Item`](Templates/Item.md) to be manipulated|
 |ColumnKey|`string`|Write only|[`ColumnKey`](Templates/ColumnKey.md), column to be interacted with|
 |Table|`Slot`|Read/Write|[`Table`](Templates/Table.md), TODO: check feasability|
-|ItemKey|`string`|Write only|[`ItemKey`](Templates/ItemKey.md), TODO: check feasability|
 |ClearInputsOnCall|`bool`|Write only|`true` will reset inputs when calling a dynamic impulse. (helps detect errors) `false` will keep the inputs. (simplifies batch processing) |
 |OnError|`Slot`|Write only|hierarchy containing a dynamic impulse receiver `sync OnError(string)`, called when errors (optional)|
 |WriteValue|`Slot`|Read only|reference to dynamic impulse receiver `sync "WriteValue"(object)`|

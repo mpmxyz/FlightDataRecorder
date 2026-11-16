@@ -1,12 +1,12 @@
 # `Slot`
 
-contains a single
+contains a single value of arbitrary type
 
 ### Properties
 
 |Name|Type|Description|
 |-|-|-|
-|Name|`string`|[ItemKey](ItemKey.md)|
+|Name|`string`|[ColumnKey](ColumnKey.md)|
 |Active|`bool`|???|
 |Tag|`string`|???|
 |OrderOffset|`long`|???|
