@@ -1,0 +1,16 @@
+{
+	"name": "FlightDataRecorder",
+	"id": "mpmxyz.FlightDataRecorder",
+	"description": "TODO_Description",
+	"category": "TODO_Category",
+	"sourceLocation": "https://github.com/mpmxyz/FlightDataRecorder/",
+	"versionTemplate": {
+		"releaseUrl": "https://github.com/mpmxyz/FlightDataRecorder/releases/tag/%TAG%",
+		"artifacts": [
+			{
+				"url": "https://github.com/mpmxyz/FlightDataRecorder/releases/download/%TAG%/FlightDataRecorder.dll",
+				"sha256": "computed automatically"
+			}
+		]
+	}
+}

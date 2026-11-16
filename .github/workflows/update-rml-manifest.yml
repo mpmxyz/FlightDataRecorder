@@ -1,0 +1,54 @@
+name: Update RML Manifest
+
+on:
+  workflow_dispatch:
+    inputs:
+      override:
+        description: Override existing version
+        required: false
+        default: false
+        type: boolean
+      dry-run: #for testing purposes only
+        description: Dry run
+        required: false
+        default: false
+        type: boolean
+      
+jobs:
+  update-rml-manifest:
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+    steps:
+    - name: Check token exists
+      env: 
+        RML_MANIFEST_TOKEN: ${{secrets.RML_MANIFEST_TOKEN}}
+      run: |
+        if [ -z "$RML_MANIFEST_TOKEN" ]
+        then
+          echo "::error::Expected secret RML_MANIFEST_TOKEN to push to repository $GITHUB_REPOSITORY_OWNER/resonite-mod-manifest" >&2
+          exit 1
+        fi
+    - name: Report if not pushing a tag
+      if: github.ref_type != 'tag'
+      run: |
+        echo "::error::Expected to push a release tag!" >&2
+        exit 1
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+      with:
+        repository: ${{github.repository_owner}}/resonite-mod-manifest
+        token: ${{secrets.RML_MANIFEST_TOKEN}}
+        path: resonite-mod-manifest
+    - name: Update and push manifest
+      env:
+        REPOSITORY_NAME: ${{github.repository}}
+        RELEASE_TAG: ${{github.ref_name}}
+        OVERRIDE_SAME_VERSION: ${{inputs.override}}
+        BRANCH_NAME: "${{github.repository}}" #branch in manifest repository is named after this repository's name
+        DRY_RUN: ${{inputs.dry-run}}
+        AUTHOR: ${{github.actor}}
+      run: |
+        scripts/compose-and-push-manifest.sh
+        
+      

@@ -1,0 +1,60 @@
+name: Auto-Release
+
+on: 
+  push:
+    branches: 
+    - 'main'
+    - 'dev'
+  workflow_call:
+    inputs:
+      description:
+        description: Release Description
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version Override
+        required: false
+        type: string
+      description:
+        description: Release Description
+        required: false
+        type: string
+      fail_on_duplicate_version:
+        description: Require unpublished version number
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 #v6.0.0
+      with:
+        dotnet-version: '10'
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+    - name: Build
+      id: build
+      run: |
+        dotnet tool restore || exit $?
+        scripts/build.sh || exit $?
+    - name: "Optional: fail if release with version number exists already"
+      env:
+        REPOSITORY_NAME: ${{github.repository}}
+        RELEASE_TAG_PATTERN: "v${{ inputs.version || steps.build.outputs.mod_version }}-*"
+        FAIL_ON_MATCH: ${{ inputs.fail_on_duplicate_version || false }} #Change the default to false to warn or true to fail
+      run: |
+        scripts/check-for-duplicated-release.sh
+    - uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd #v1.12.0
+      if: github.ref_name == 'main' && github.ref_type == 'branch'
+      with:
+        tag: "v${{ inputs.version || steps.build.outputs.mod_version }}-${{steps.build.outputs.resonite_version}}"
+        artifacts: "ResoniteAssemblies/rml_mods/*.dll" #Use this if your mod runs with a single dll file!
+#       artifacts: "ResoniteAssemblies/*.zip" #Use this if you need to include libraries or other assets!
+        makeLatest: true
+        body: |
+          ${{ inputs.description || 'TODO' }}
