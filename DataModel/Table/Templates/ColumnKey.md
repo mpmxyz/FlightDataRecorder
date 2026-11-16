@@ -1,6 +1,6 @@
 # `string`
 
-neven `null`, defines a column of data
+never `null`, defines a column of data
 
 ### Known values
 

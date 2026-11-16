@@ -11,7 +11,7 @@
 |ClearInputsOnCall|`bool`|Write only|`true` will reset inputs when calling a dynamic impulse. (helps detect errors) `false` will keep the inputs. (simplifies batch processing) |
 |OnError|`Slot`|Write only|hierarchy containing a dynamic impulse receiver `sync OnError(string)`, called when errors (optional)|
 |WriteValue|`Slot`|Read only|reference to dynamic impulse receiver `sync "WriteValue"(object)`|
-|ReadValue|`Slot`|Read only|reference to dynamic impulse receiver `sync "ReadValue"(object)`|
+|ReadValue|`Slot`|Read only|reference to dynamic impulse receiver `sync "ReadValue"(Slot)`|
 
 ### Dynamic Impulses
 
