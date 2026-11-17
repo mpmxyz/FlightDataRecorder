@@ -20,7 +20,7 @@ public class FlightDataRecorder : ResoniteMod {
 	private static readonly ModConfigurationKey<bool> enabled = new("enabled", "Does the mod do anything?", () => true);
 
 	public override void OnEngineInit() {
-		Harmony harmony = new("FlightDataRecorder.FlightDataRecorder");
+		Harmony harmony = new("mpmxyz.FlightDataRecorder");
 		harmony.PatchAll();
 	}
 
