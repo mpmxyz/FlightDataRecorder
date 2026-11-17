@@ -1,11 +1,13 @@
 ﻿using Elements.Core;
 
+using FlightDataRecorder.ProtoFluxHelpers;
+
 using FrooxEngine;
+using FrooxEngine.ProtoFlux;
 
 namespace FlightDataRecorder.Generators;
-internal abstract class BaseHandler<T> {
+internal abstract class BaseHandler<T> : IHandler {
     public static string Name => typeof(T).GetNiceName();
-
 
     public Slot Build(Slot parent) {
         var handlerSlot = parent.AddSlot(Name);
@@ -26,6 +28,7 @@ internal abstract class BaseHandler<T> {
 
         var protoFlux = handlerSlot.AddSlot("ProtoFlux");
         var impulseReceivers = BuildProtoFlux(protoFlux);
+        FormatProtoFlux(protoFlux);
         protoFlux.AttachComponent<DynamicReferenceVariable<Slot>>(beforeAttach: (variable) => {
             variable.VariableName.Value = "Handler/ReadValue";
             variable.Reference.Target = impulseReceivers.ReadValue;
@@ -40,4 +43,17 @@ internal abstract class BaseHandler<T> {
 
     protected abstract ImpulseReceivers BuildProtoFlux(Slot protoFlux);
     protected abstract Slot BuildTemplate(Slot templates);
+
+    private void FormatProtoFlux(Slot protoFlux) {
+        protoFlux.World.RunInUpdates(3, () => {
+            var groups = protoFlux.Children
+                .Select((child) => child.GetComponent<ProtoFluxNode>()?.Group)
+                .OfType<ProtoFluxNodeGroup>()
+                .ToHashSet();
+            FlightDataRecorder.Warn($"groups.Count={groups.Count}");
+            foreach (var group in groups) {
+                new NodeFormatter(group).Apply();
+            }
+        });
+    }
 }

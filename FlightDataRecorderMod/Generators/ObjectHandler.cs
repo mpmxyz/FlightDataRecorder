@@ -1,13 +1,14 @@
 ﻿using Elements.Core;
 
+using FlightDataRecorder.ProtoFluxHelpers;
+
 using FrooxEngine;
 using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.Actions;
 using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.FrooxEngine.Slots;
 
 namespace FlightDataRecorder.Generators;
 internal class ObjectHandler<T> : BaseHandler<T> where T : class, IEquatable<T> {
-
-    ObjectHandler(){
+    internal ObjectHandler(){
         if (!Coder<T>.IsEnginePrimitive) {
             throw new ArgumentException($"Invalid type argument: {typeof(T)}");
         }

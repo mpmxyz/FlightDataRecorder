@@ -1,10 +1,11 @@
-﻿using FrooxEngine;
+﻿using FlightDataRecorder.ProtoFluxHelpers;
+
+using FrooxEngine;
 using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.Actions;
 using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.FrooxEngine.Slots;
 
 namespace FlightDataRecorder.Generators;
 internal class TypeHandler : BaseHandler<Type> {
-
     protected override ImpulseReceivers BuildProtoFlux(Slot protoFlux) {
         var builder = new NodeBuilder(protoFlux);
 

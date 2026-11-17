@@ -1,4 +1,4 @@
-﻿using Elements.Core;
+﻿using FlightDataRecorder.ProtoFluxHelpers;
 
 using FrooxEngine;
 using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.Actions;
@@ -6,13 +6,6 @@ using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.FrooxEngine.Slots;
 
 namespace FlightDataRecorder.Generators;
 internal class ReferenceHandler<T> : BaseHandler<T> where T : class, IWorldElement {
-
-    ReferenceHandler(){
-        if (!Coder<T>.IsEnginePrimitive) {
-            throw new ArgumentException($"Invalid type argument: {typeof(T)}");
-        }
-    }
-
     protected override ImpulseReceivers BuildProtoFlux(Slot protoFlux) {
         var builder = new NodeBuilder(protoFlux);
 

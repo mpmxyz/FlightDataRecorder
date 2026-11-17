@@ -7,11 +7,11 @@ using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.Collections;
 using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.FrooxEngine.Elements;
 using FrooxEngine.ProtoFlux.Runtimes.Execution.Nodes.FrooxEngine.Variables;
 
-namespace FlightDataRecorder.Generators;
+namespace FlightDataRecorder.ProtoFluxHelpers;
 internal class NodeBuilder(Slot parent) {
     private readonly Slot parent = parent;
 
-    internal T Node<T>(Action<T>? init) where T : FrooxEngine.ProtoFlux.ProtoFluxNode, new() {
+    internal T Node<T>(Action<T>? init) where T : ProtoFluxNode, new() {
         var nodeSlot = parent.AddSlot(typeof(T).Name);
         //TODO: positioning
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -35,9 +35,9 @@ internal class NodeBuilder(Slot parent) {
         });
     }
 
-    internal DynamicVariableObjectInput<T> DynamicObjectInput<T>(string value) {
+    internal DynamicVariableObjectInput<T> DynamicObjectInput<T>(string variableName) {
         return Node<DynamicVariableObjectInput<T>>((node) => {
-            SetGlobalValue(node.VariableName, "OnError");
+            SetGlobalValue(node.VariableName, variableName);
         });
     }
 
@@ -235,10 +235,8 @@ internal class NodeBuilder(Slot parent) {
         if (proxyRef.Target == null) {
             proxyRef.Target = proxyRef.Slot.AttachComponent<GlobalReference<T>>();
         }
-#pragma warning disable CS8604 // Possible null reference argument.
         if (!proxyRef.Target.TrySetValue(value)) {
             throw new InvalidOperationException($"Failed to assign value {value} to proxy of type {typeof(T)}!");
         }
-#pragma warning restore CS8604 // Possible null reference argument.
     }
 }
