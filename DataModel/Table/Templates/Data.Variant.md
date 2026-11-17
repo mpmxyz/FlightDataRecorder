@@ -32,7 +32,7 @@ The following value types `T` are allowed:
 - `Rect`, `BoundingBox`
 - `dummy`, `RefID`
 - `SphericalHarmonicsL1<T>`, `SphericalHarmonicsL2<T>`, `SphericalHarmonicsL3<T>`, `SphericalHarmonicsL4<T>`
-- implementations if `IQuantity` or `IEncodable`
+- implementations of `IQuantity` or `IEncodable`
 - `Nullable<T>`
 - enums
 
