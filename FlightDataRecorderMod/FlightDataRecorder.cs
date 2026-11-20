@@ -5,8 +5,6 @@ using FlightDataRecorder.Generators;
 
 using FrooxEngine;
 
-using HarmonyLib;
-
 using ResoniteModLoader;
 
 namespace FlightDataRecorder;
@@ -32,7 +30,7 @@ public class FlightDataRecorder : ResoniteMod {
 			});
 
 			List<IHandler> handlers = [
-				new TypeHandler(),/*
+				new TypeHandler(),
 				new ReferenceHandler<IWorldElement>(),
 
 				new ValueHandler<bool>(),
@@ -118,10 +116,14 @@ public class FlightDataRecorder : ResoniteMod {
 				new ValueHandler<BoundingBox>(),
 
 				new ValueHandler<dummy>(),
-				new ValueHandler<RefID>()*/
+				new ValueHandler<RefID>()
 			];
+			int i = 0;
 			foreach (var handler in handlers) {
-				handler.Build(slot);
+				slot.World.RunInUpdates(i, () => {
+					handler.Build(slot);
+				});
+				i++;
 			}
 
             slot.OpenInspectorForTarget();
