@@ -10,16 +10,16 @@ A `Record` is a set of data where keys are associated with values.
 |Name|`string`||reserved|
 |Active|`bool`||reserved,TODO: used for locking/highlight/selection/garbage collection?|
 |Tag|`string`||reserved|
-|OrderOffset|`long`|Read/Write|used to define order among records if necessary for an application; the Flight Data Recorder uses [`LogTime`](../../LogTime.md), a bit-converted `double` timestamp to ensure time-consistent order|
+|OrderOffset|`long`|Read/Write|used to define order among records if necessary for an application; the Flight Data Recorder uses [`LogTime`](../../Values/LogTime.md), a bit-converted `double` timestamp to ensure time-consistent order|
 
 
 ### Space: "Record"
 
 |Name|Type|Access|Description|
 |-|-|-|-|
-|Values|`SyncFieldDictionary<string,string>`|Read only, Collection: Read/Write|[`Key`](Key.md) -> Value.ToString()|
-|Types|`SyncTypeDictionary<string>`|Read only, Collection: Read/Write|[`Key`](Key.md) -> Value.GetType()|
-|Data.Variants|`SyncFieldDictionary<string,string>`|Read only, Collection: Read/Write|[`Key`](Key.md) -> [`Data.Variant`](Data.Variant), identifies how a value is read/written|
+|Values|`SyncFieldDictionary<string,string>`|Read only, Collection: Read/Write|[`Key`](../Values/Key.md) -> Value.ToString()|
+|Types|`SyncTypeDictionary<string>`|Read only, Collection: Read/Write|[`Key`](../Values/Key.md) -> Value.GetType()|
+|Data.Variants|`SyncFieldDictionary<string,string>`|Read only, Collection: Read/Write|[`Key`](../Values/Key.md) -> [`Data.Variant`](../Values/Data.Variant.md), identifies how a value is read/written|
 
 **When a value is added or modified all these dictionaries _must_ be written to.**
 

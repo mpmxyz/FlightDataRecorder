@@ -10,6 +10,7 @@ never null, identifies how and what kind of data is stored
 |Type|for type values|
 |IWorldElement|for references (implementing `IWorldElement`)|
 |ObjectContainer|for anything else (limitations: heavy-weight, non-networked and non-persistent)|
+|Null|to represent `null` values|
 
 The following value types `T` are allowed:
 - `bool`, `bool2`, `bool3`, `bool4`

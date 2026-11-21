@@ -6,7 +6,7 @@ contains a single value of arbitrary type
 
 |Name|Type|Description|
 |-|-|-|
-|Name|`string`|[Key](Key.md)|
+|Name|`string`|[`Key`](../Values/Key.md) of the contained value|
 |Active|`bool`|???|
 |Tag|`string`|???|
 |OrderOffset|`long`|???|

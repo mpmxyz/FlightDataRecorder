@@ -1,6 +1,6 @@
 # `Slot`
 
-Tables contain a list of flat semi-structured data where each line - [`Record`](Record.md) in this specification - can have data associated with named columns - [`Key`](Key.md) in this specification.
+Tables contain a list of flat semi-structured data where each line - [`Record`](../../Records/Templates/Record.md) in this specification - can have data associated with named columns - [`Key`](../../Records/Values/Key.md) in this specification.
 
 The names `Record` and `Key` instead of `Line`/`Row` and `Column` have been chosen because the library mostly does not make assumptions on how items are arranged.
 One could also work with individual items embedded in dedicated objects or with items connected as a graph.
@@ -18,5 +18,6 @@ For this reason each record is independent and contains its own data dictionarie
 
 |Name|Type|Access|Description|
 |-|-|-|-|
-|Records|`Slot`|Read only|contains instances of [`Record`](Record.md)|
+|Records|`Slot`|Read only|contains instances of [`Record`](Record.md) that each represent a log event|
 
+TODO: metadata to store bones, snapshots of objects etc.

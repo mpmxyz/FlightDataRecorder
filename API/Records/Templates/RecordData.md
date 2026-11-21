@@ -20,7 +20,7 @@ The check for existence should be focused on checking for their variables as som
 
 |Name|Type|Access|Description|
 |-|-|-|-|
-|Values|`SyncFieldDictionary<string,T>`|Read only, Collection: Read/Write|[`Key`](Key.md) -> Value|
+|Values|`SyncFieldDictionary<string,T>`|Read only, Collection: Read/Write|[`Key`](../Values/Key.md) -> Value|
 
 ## Variant: "Type" (type values)
 
@@ -28,7 +28,7 @@ The check for existence should be focused on checking for their variables as som
 
 |Name|Type|Access|Description|
 |-|-|-|-|
-|Values|`SyncTypeDictionary<string>`|Read only, Collection: Read/Write|[`Key`](Key.md) -> Value|
+|Values|`SyncTypeDictionary<string>`|Read only, Collection: Read/Write|[`Key`](../Values/Key.md) -> Value|
 
 ## Variant: "IWorldElement" (used for all values of IWorldElement)
 
@@ -36,7 +36,7 @@ The check for existence should be focused on checking for their variables as som
 
 |Name|Type|Access|Description|
 |-|-|-|-|
-|Values|`SyncRefDictionary<string,IWorldElement>`|Read only, Collection: Read/Write|[`Key`](Key.md) -> Value|
+|Values|`SyncRefDictionary<string,IWorldElement>`|Read only, Collection: Read/Write|[`Key`](../Values/Key.md) -> Value|
 
 ## Variant: "ObjectContainer" (ProtoFlux-Store based storage)
 
@@ -45,4 +45,4 @@ The check for existence should be focused on checking for their variables as som
 |Name|Type|Access|Description|
 |-|-|-|-|
 |Containers|`Slot`|Read only|parent of instances of [`ObjectContainer`](ObjectContainer.md)|
-|Containers|`SyncRefDictionary<string,Slot>`|Read only, Collection: Read/Write|[`Key`](Key.md) -> [`ObjectContainer`](ObjectContainer.md), a lookup table to get children of `Containers:Slot` by key|
+|Containers|`SyncRefDictionary<string,Slot>`|Read only, Collection: Read/Write|[`Key`](../Values/Key.md) -> [`ObjectContainer`](ObjectContainer.md), a lookup table to get children of `Containers:Slot` by key|

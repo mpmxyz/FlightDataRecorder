@@ -6,8 +6,8 @@ never `null`, defines a property within a record
 
 |`Key`|Associated Value Type|Description|
 |-|-|-|
-|Source|[`EventSource`](../EventSource.md)||
-|EventType|[`EventType`](../EventType.md)||
+|Source|[`EventSource`](../../Logging/Templates/EventSource.md)||
+|EventType|[`EventType`](../../Logging/Values/EventType.md)||
 |User|`User`||
 |UserID|`string`||
 |Message|`string`||

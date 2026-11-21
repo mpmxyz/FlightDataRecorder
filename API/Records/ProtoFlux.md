@@ -5,7 +5,7 @@
 |Name|Type|Access|Description|
 |-|-|-|-|
 |Record|`Slot`|Write only|[`Record`](Templates/Record.md) to be manipulated|
-|Key|`string`|Write only|[`Key`](Templates/Key.md), key of the value to be interacted with|
+|Key|`string`|Write only|[`Key`](Values/Key.md), key of the value to be interacted with|
 |ClearInputsOnCall|`bool`|Write only|`true` will reset inputs when calling a dynamic impulse. (helps detect errors) `false` will keep the inputs. (simplifies batch processing) |
 |OnError|`Slot`|Write only|hierarchy containing a dynamic impulse receiver `sync OnError(string)`, called when errors (optional)|
 |WriteValue|`Slot`|Read only|reference to dynamic impulse receiver `sync "WriteValue"(object)`|
