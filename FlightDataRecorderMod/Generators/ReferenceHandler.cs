@@ -9,9 +9,9 @@ internal class ReferenceHandler<T> : BaseHandler<T> where T : class, IWorldEleme
     protected override ImpulseReceivers BuildProtoFlux(Slot protoFlux) {
         var builder = new NodeBuilder(protoFlux);
 
-        var item = builder.DynamicObjectInput<Slot>("Item");
-        var values = builder.ReadDynamicObject<SyncRefDictionary<string, T>>(item.Value, "Values");
-        var key = builder.DynamicObjectInput<string>("ColumnKey");
+        var record = builder.DynamicObjectInput<Slot>("Record");
+        var values = builder.ReadDynamicObject<SyncRefDictionary<string, T>>(record.Value, "Values");
+        var key = builder.DynamicObjectInput<string>("Key");
 
         var writeValue = builder.Node<DynamicImpulseReceiverWithObject<object>>((node) => {
             builder.SetGlobalValue(node.Tag, "WriteValue");
@@ -24,10 +24,10 @@ internal class ReferenceHandler<T> : BaseHandler<T> where T : class, IWorldEleme
                 onFail: builder.If(
                     values.FoundValue,
                     onFalse: builder.If(
-                        builder.ElementExists(item.Value),
+                        builder.ElementExists(record.Value),
                         onTrue: builder.Node<DuplicateSlot>((node) => {
                             node.Template.Target = builder.DynamicObjectInput<Slot>("Handler/Template").Value;
-                            node.OverrideParent.Target = item.Value;
+                            node.OverrideParent.Target = record.Value;
                             node.Next.Target = builder.SetReferenceWithObjectKey(
                                 values.Value,
                                 key.Value,
@@ -35,7 +35,7 @@ internal class ReferenceHandler<T> : BaseHandler<T> where T : class, IWorldEleme
                                 onFail: builder.OnError("Failed to write")
                             );
                         }),
-                        onFalse: builder.OnError("Handler.WriteValue: invalid/missing Item")
+                        onFalse: builder.OnError("Handler.WriteValue: invalid/missing Record")
                     )
                 )
             );

@@ -1,10 +1,10 @@
 # `string`
 
-never `null`, defines a column of data
+never `null`, defines a property within a record
 
 ### Known values
 
-|`ColumnKey`|Associated Value Type|Description|
+|`Key`|Associated Value Type|Description|
 |-|-|-|
 |Source|[`EventSource`](../EventSource.md)||
 |EventType|[`EventType`](../EventType.md)||

@@ -42,8 +42,8 @@ internal class NodeFormatter(ProtoFluxNodeGroup group) {
     /// </summary>
     private void ComputeTopologicalIndices() {
         HashSet<ProtoFluxNode> leftNeighborlessNodes = [.. group.Nodes];
-        foreach (var item in leftNeighborCounts.Keys) {
-            leftNeighborlessNodes.Remove(item);
+        foreach (var record in leftNeighborCounts.Keys) {
+            leftNeighborlessNodes.Remove(record);
         }
         HashSet<ProtoFluxNode> nextLeftNeighborlessNodes = [];
         Dictionary<ProtoFluxNode, int> leftUnvisitedNeighborCounts = new(leftNeighborCounts);

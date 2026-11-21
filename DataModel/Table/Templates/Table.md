@@ -1,20 +1,22 @@
 # `Slot`
 
-TODO: rework idea -> each row has its own data dictionaries
-advantages:
-- no user partitioning necessary
--> simpler code
--> no need for garbage collection
+Tables contain a list of flat semi-structured data where each line - [`Record`](Record.md) in this specification - can have data associated with named columns - [`Key`](Key.md) in this specification.
 
-possible disadvantage:
-- more allocations for low column count/many different types
+The names `Record` and `Key` instead of `Line`/`Row` and `Column` have been chosen because the library mostly does not make assumptions on how items are arranged.
+One could also work with individual items embedded in dedicated objects or with items connected as a graph.
 
-=> design, implement, compare performance/complexity with column-based
+There were two ideas on how to structure the items and their data:
+1. dictionaries per key with simple slots to represent items
+2. items with indidividual data dictionaries
+
+In theory the first approach would result in less allocations per record.
+Unfortunately its implementation is so complex (i.e. to handle concurrently created items) that it is even less performant in practice. (approx. double the runtime in a test)
+
+For this reason each record is independent and contains its own data dictionaries.
 
 ### Space: "Table"
 
 |Name|Type|Access|Description|
 |-|-|-|-|
-|Items|`Slot`|Read only|contains instances of [`Item`](Item.md)|
-|Columns|`Slot`|Read only|TODO: provide a way to quickly query which columns are available, needs a way to cleanup duplicates|
+|Records|`Slot`|Read only|contains instances of [`Record`](Record.md)|
 

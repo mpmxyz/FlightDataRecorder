@@ -6,7 +6,7 @@ contains a single value of arbitrary type
 
 |Name|Type|Description|
 |-|-|-|
-|Name|`string`|[ColumnKey](ColumnKey.md)|
+|Name|`string`|[Key](Key.md)|
 |Active|`bool`|???|
 |Tag|`string`|???|
 |OrderOffset|`long`|???|

@@ -7,7 +7,7 @@ using FrooxEngine.ProtoFlux;
 
 namespace FlightDataRecorder.Generators;
 internal abstract class BaseHandler<T> : IHandler {
-    public static string Name => typeof(T).GetNiceName();
+    public virtual string Name => typeof(T).GetNiceName();
 
     public Slot Build(Slot parent) {
         var handlerSlot = parent.AddSlot(Name);
@@ -19,12 +19,14 @@ internal abstract class BaseHandler<T> : IHandler {
 
         var templates = handlerSlot.AddSlot("Templates");
         var template = BuildTemplate(templates);
-        template.Name = Name;
-        template.Tag = Name;
-        templates.AttachComponent<DynamicReferenceVariable<Slot>>(beforeAttach: (variable) => {
-            variable.VariableName.Value = "Handler/Template";
-            variable.Reference.Target = template;
-        });
+        if (template != null) {
+            template.Name = Name;
+            template.Tag = Name;
+            templates.AttachComponent<DynamicReferenceVariable<Slot>>(beforeAttach: (variable) => {
+                variable.VariableName.Value = "Handler/Template";
+                variable.Reference.Target = template;
+            });
+        }
 
         var protoFlux = handlerSlot.AddSlot("ProtoFlux");
         var impulseReceivers = BuildProtoFlux(protoFlux);
@@ -42,7 +44,7 @@ internal abstract class BaseHandler<T> : IHandler {
     }
 
     protected abstract ImpulseReceivers BuildProtoFlux(Slot protoFlux);
-    protected abstract Slot BuildTemplate(Slot templates);
+    protected abstract Slot? BuildTemplate(Slot templates);
 
     private void FormatProtoFlux(Slot protoFlux) {
         protoFlux.World.RunInUpdates(3, () => {

@@ -8,7 +8,7 @@ never null, identifies how and what kind of data is stored
 |-|-|
 |T|for values of type `T`|
 |Type|for type values|
-|Reference|for references (implementing `IWorldElement`)|
+|IWorldElement|for references (implementing `IWorldElement`)|
 |ObjectContainer|for anything else (limitations: heavy-weight, non-networked and non-persistent)|
 
 The following value types `T` are allowed:

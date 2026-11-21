@@ -25,7 +25,7 @@ public class FlightDataRecorder : ResoniteMod {
 		DevCreateNewForm.AddAction("", "FlightDataRecorder Data Handlers", (slot) => {
 			slot.Name = "Data Handlers";
 			slot.AttachComponent<DynamicReferenceVariable<Slot>>(beforeAttach: (variable) => {
-				variable.VariableName.Value = "ProtoFlux.ItemData.Handlers";
+				variable.VariableName.Value = "ProtoFlux.RecordData.Handlers";
 				variable.Reference.Target = slot;
 			});
 
@@ -126,7 +126,7 @@ public class FlightDataRecorder : ResoniteMod {
 				i++;
 			}
 
-            slot.OpenInspectorForTarget();
+			slot.OpenInspectorForTarget();
 		});
 	}
 

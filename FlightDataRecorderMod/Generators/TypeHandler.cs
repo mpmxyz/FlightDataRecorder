@@ -9,9 +9,9 @@ internal class TypeHandler : BaseHandler<Type> {
     protected override ImpulseReceivers BuildProtoFlux(Slot protoFlux) {
         var builder = new NodeBuilder(protoFlux);
 
-        var item = builder.DynamicObjectInput<Slot>("Item");
-        var values = builder.ReadDynamicObject<SyncTypeDictionary<string>>(item.Value, "Values");
-        var key = builder.DynamicObjectInput<string>("ColumnKey");
+        var record = builder.DynamicObjectInput<Slot>("Record");
+        var values = builder.ReadDynamicObject<SyncTypeDictionary<string>>(record.Value, "Values");
+        var key = builder.DynamicObjectInput<string>("Key");
 
         var writeValue = builder.Node<DynamicImpulseReceiverWithObject<object>>((node) => {
             builder.SetGlobalValue(node.Tag, "WriteValue");
@@ -24,10 +24,11 @@ internal class TypeHandler : BaseHandler<Type> {
                 onFail: builder.If(
                     values.FoundValue,
                     onFalse: builder.If(
-                        builder.ElementExists(item.Value),
+                        builder.ElementExists(record.Value),
                         onTrue: builder.Node<DuplicateSlot>((node) => {
                             node.Template.Target = builder.DynamicObjectInput<Slot>("Handler/Template").Value;
-                            node.OverrideParent.Target = item.Value;
+                            node.OverrideParent.Target = record.Value;
+                            //TODO: unset value if type is type of type?
                             node.Next.Target = builder.SetTypeWithObjectKey(
                                 values.Value,
                                 key.Value,
@@ -35,7 +36,7 @@ internal class TypeHandler : BaseHandler<Type> {
                                 onFail: builder.OnError("Failed to write")
                             );
                         }),
-                        onFalse: builder.OnError("Handler.WriteValue: invalid/missing Item")
+                        onFalse: builder.OnError("Handler.WriteValue: invalid/missing Record")
                     )
                 )
             );
