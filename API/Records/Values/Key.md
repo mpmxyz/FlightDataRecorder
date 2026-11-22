@@ -6,11 +6,13 @@ never `null`, defines a property within a record
 
 |`Key`|Associated Value Type|Description|
 |-|-|-|
-|Source|[`EventSource`](../../Logging/Templates/EventSource.md)||
-|EventType|[`EventType`](../../Logging/Values/EventType.md)||
+|Source|`Slot`|[`EventSource`](../../Logging/Templates/EventSource.md)||
+|EventType|`string`|[`EventType`](../../Logging/Values/EventType.md)||
 |User|`User`||
-|UserID|`string`||
-|Message|`string`||
+|User.ID|`string`||
+|User.Name|`string`||
+|Message|`string` or `object`||
+|Level|`string`|[`Level`](../../Logging/Values/Level.md)||
 |UTC|`DateTime`||
 |T|`double`||
 

@@ -14,6 +14,17 @@ Unfortunately its implementation is so complex (i.e. to handle concurrently crea
 
 For this reason each record is independent and contains its own data dictionaries.
 
+### Properties
+
+|Name|Type|Access|Description|
+|-|-|-|-|
+|Name|`string`||reserved|
+|Active|`bool`||reserved|
+|Tag|`string`||reserved|
+|OrderOffset|`long`|reserved|
+
+TODO: check which properties should be up to the user (i.e. to give logs a name within the inventory)
+
 ### Space: "Table"
 
 |Name|Type|Access|Description|
